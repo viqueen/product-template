@@ -1,0 +1,28 @@
+{
+  "name": "@labset/buf-template",
+  "version": "1.0.0",
+  "author": "Hasnae R. <>",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "_harness",
+    "_schema",
+    "api/web-sdk",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "claude": "claude",
+    "harness": "npm run --workspace @labset/buf-template-harness",
+    "schema": "npm run --workspace @labset/buf-template-schema",
+    "backend": "npm run --workspace @labset/buf-template-backend",
+    "frontend": "npm run --workspace @labset/buf-template-frontend",
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write frontend/",
+    "format:check": "prettier --check frontend/"
+  },
+  "devDependencies": {
+    "@anthropic-ai/claude-code": "^1.0.44",
+    "prettier": "^3.6.2"
+  }
+}
