@@ -1,56 +1,48 @@
-import { useState, useEffect } from "react";
+import {useEffect, useState} from "react";
 import {
-  Container,
-  Title,
-  Text,
-  Card,
-  Stack,
-  Group,
+  Alert,
   Badge,
   Button,
-  TextInput,
-  Select,
-  ActionIcon,
-  Loader,
+  Card,
   Center,
-  Alert,
+  Container,
+  Group,
+  Loader,
+  Select,
+  Stack,
+  Text,
+  TextInput,
+  Title,
 } from "@mantine/core";
-import {
-  IconPlus,
-  IconCheck,
-  IconClock,
-  IconX,
-  IconAlertCircle,
-} from "@tabler/icons-react";
-import { AppLayout } from "../../components";
-import { createConnectTransport } from "@connectrpc/connect-web";
-import { createPromiseClient } from "@connectrpc/connect";
-import { TodoService } from "@labset/product-template-web-sdk/todo/v1/todo_connect";
-import { TodoStatus } from "@labset/product-template-web-sdk/todo/v1/todo_model_pb";
+import {IconAlertCircle, IconCheck, IconClock, IconPlus, IconX,} from "@tabler/icons-react";
+import {AppLayout} from "../../components";
+import {createConnectTransport} from "@connectrpc/connect-web";
+import {createClient} from "@connectrpc/connect";
+import {TodoV1TodoModel, TodoV1TodoService} from "@labset/product-template-api-web-sdk";
 
 const transport = createConnectTransport({
   baseUrl: "http://localhost:8080",
 });
 
-const client = createPromiseClient(TodoService, transport);
+const client = createClient(TodoV1TodoService.TodoService, transport);
 
 const TasksPage = () => {
-  const [todos, setTodos] = useState<any[]>([]);
+  const [todos, setTodos] = useState<TodoV1TodoModel.Todo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [newTodoDescription, setNewTodoDescription] = useState("");
   const [addingTodo, setAddingTodo] = useState(false);
 
   // Status badge colors
-  const getStatusColor = (status: TodoStatus) => {
+  const getStatusColor = (status: TodoV1TodoModel.TodoStatus) => {
     switch (status) {
-      case TodoStatus.TODO_STATUS_PENDING:
+      case TodoV1TodoModel.TodoStatus.PENDING:
         return "blue";
-      case TodoStatus.TODO_STATUS_IN_PROGRESS:
+      case TodoV1TodoModel.TodoStatus.IN_PROGRESS:
         return "yellow";
-      case TodoStatus.TODO_STATUS_COMPLETED:
+      case TodoV1TodoModel.TodoStatus.COMPLETED:
         return "green";
-      case TodoStatus.TODO_STATUS_CANCELLED:
+      case TodoV1TodoModel.TodoStatus.CANCELLED:
         return "red";
       default:
         return "gray";
@@ -58,15 +50,15 @@ const TasksPage = () => {
   };
 
   // Status icons
-  const getStatusIcon = (status: TodoStatus) => {
+  const getStatusIcon = (status: TodoV1TodoModel.TodoStatus) => {
     switch (status) {
-      case TodoStatus.TODO_STATUS_PENDING:
+      case TodoV1TodoModel.TodoStatus.PENDING:
         return <IconClock size={16} />;
-      case TodoStatus.TODO_STATUS_IN_PROGRESS:
+      case TodoV1TodoModel.TodoStatus.IN_PROGRESS:
         return <IconClock size={16} />;
-      case TodoStatus.TODO_STATUS_COMPLETED:
+      case TodoV1TodoModel.TodoStatus.COMPLETED:
         return <IconCheck size={16} />;
-      case TodoStatus.TODO_STATUS_CANCELLED:
+      case TodoV1TodoModel.TodoStatus.CANCELLED:
         return <IconX size={16} />;
       default:
         return null;
@@ -74,15 +66,15 @@ const TasksPage = () => {
   };
 
   // Status display text
-  const getStatusText = (status: TodoStatus) => {
+  const getStatusText = (status: TodoV1TodoModel.TodoStatus) => {
     switch (status) {
-      case TodoStatus.TODO_STATUS_PENDING:
+      case TodoV1TodoModel.TodoStatus.PENDING:
         return "Pending";
-      case TodoStatus.TODO_STATUS_IN_PROGRESS:
+      case TodoV1TodoModel.TodoStatus.IN_PROGRESS:
         return "In Progress";
-      case TodoStatus.TODO_STATUS_COMPLETED:
+      case TodoV1TodoModel.TodoStatus.COMPLETED:
         return "Completed";
-      case TodoStatus.TODO_STATUS_CANCELLED:
+      case TodoV1TodoModel.TodoStatus.CANCELLED:
         return "Cancelled";
       default:
         return "Unknown";
@@ -127,7 +119,7 @@ const TasksPage = () => {
   };
 
   // Update todo status
-  const handleUpdateStatus = async (todoId: string, newStatus: TodoStatus) => {
+  const handleUpdateStatus = async (todoId: string, newStatus: TodoV1TodoModel.TodoStatus) => {
     try {
       await client.updateTodo({
         id: todoId,
@@ -216,12 +208,12 @@ const TasksPage = () => {
                       <Text
                         size="sm"
                         td={
-                          todo.status === TodoStatus.TODO_STATUS_COMPLETED
+                          todo.status === TodoV1TodoModel.TodoStatus.COMPLETED
                             ? "line-through"
                             : undefined
                         }
                         c={
-                          todo.status === TodoStatus.TODO_STATUS_COMPLETED
+                          todo.status === TodoV1TodoModel.TodoStatus.COMPLETED
                             ? "dimmed"
                             : undefined
                         }
@@ -241,20 +233,20 @@ const TasksPage = () => {
                         size="xs"
                         value={todo.status.toString()}
                         onChange={(value) =>
-                          handleUpdateStatus(todo.id, parseInt(value!) as TodoStatus)
+                          handleUpdateStatus(todo.id, parseInt(value!) as TodoV1TodoModel.TodoStatus)
                         }
                         data={[
-                          { value: TodoStatus.TODO_STATUS_PENDING.toString(), label: "Pending" },
+                          { value: TodoV1TodoModel.TodoStatus.PENDING.toString(), label: "Pending" },
                           {
-                            value: TodoStatus.TODO_STATUS_IN_PROGRESS.toString(),
+                            value: TodoV1TodoModel.TodoStatus.IN_PROGRESS.toString(),
                             label: "In Progress",
                           },
                           {
-                            value: TodoStatus.TODO_STATUS_COMPLETED.toString(),
+                            value: TodoV1TodoModel.TodoStatus.COMPLETED.toString(),
                             label: "Completed",
                           },
                           {
-                            value: TodoStatus.TODO_STATUS_CANCELLED.toString(),
+                            value: TodoV1TodoModel.TodoStatus.CANCELLED.toString(),
                             label: "Cancelled",
                           },
                         ]}

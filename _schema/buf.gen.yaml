@@ -9,10 +9,7 @@ plugins:
     opt: paths=source_relative
 
   # web-sdk
-  - remote: buf.build/bufbuild/es
-    out: ../api/web-sdk/src
-    opt: target=ts
-  - remote: buf.build/connectrpc/es
+  - remote: buf.build/bufbuild/es:v2.2.0
     out: ../api/web-sdk/src
     opt: target=ts
 
