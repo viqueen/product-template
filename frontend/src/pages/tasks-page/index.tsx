@@ -1,5 +1,5 @@
-const PluginPage = () => {
-  return <div>plugin page</div>;
+const TasksPage = () => {
+  return <div>tasks page</div>;
 };
 
-export { PluginPage };
+export { TasksPage };

@@ -18,12 +18,7 @@ const TopNavigation = ({ opened, toggle }: TopNavigationProps) => {
   return (
     <Group h="100%" px="md" justify="space-between">
       <Group>
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          hiddenFrom="sm"
-          size="sm"
-        />
+        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         <Title order={3}>Dashboard</Title>
       </Group>
       <Group>
