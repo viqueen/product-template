@@ -9,7 +9,7 @@ import (
 	todoV1 "github.com/viqueen/product-template/api/go-sdk/todo/v1"
 )
 
-func (t todoService) GetTodo(
+func (s *todoService) GetTodo(
 	ctx context.Context,
 	request *connect.Request[todoV1.GetTodoRequest],
 ) (*connect.Response[todoV1.GetTodoResponse], error) {
@@ -29,7 +29,7 @@ func (t todoService) GetTodo(
 		Str("todo_id", identifier.String()).
 		Msg("getting todo")
 
-	found, err := t.repo.GetByID(ctx, identifier)
+	found, err := s.repo.GetByID(ctx, identifier)
 	if err != nil {
 		log.Error().
 			Err(err).

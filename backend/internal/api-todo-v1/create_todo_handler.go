@@ -10,7 +10,7 @@ import (
 	"github.com/viqueen/product-template/backend/internal/store"
 )
 
-func (t todoService) CreateTodo(
+func (s *todoService) CreateTodo(
 	ctx context.Context,
 	request *connect.Request[todoV1.CreateTodoRequest],
 ) (*connect.Response[todoV1.CreateTodoResponse], error) {
@@ -24,9 +24,10 @@ func (t todoService) CreateTodo(
 	todo := &store.Todo{
 		ID:          id,
 		Description: request.Msg.GetDescription(),
+		Status:      int32(todoV1.TodoStatus_TODO_STATUS_PENDING), // Set initial status to PENDING
 	}
 
-	err := t.repo.Create(ctx, todo)
+	err := s.repo.Create(ctx, todo)
 	if err != nil {
 		log.Error().
 			Err(err).

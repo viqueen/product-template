@@ -9,7 +9,7 @@ import (
 	"github.com/viqueen/product-template/backend/internal/store"
 )
 
-func (t todoService) ListTodos(
+func (s *todoService) ListTodos(
 	ctx context.Context,
 	request *connect.Request[todoV1.ListTodosRequest],
 ) (*connect.Response[todoV1.ListTodosResponse], error) {
@@ -21,7 +21,7 @@ func (t todoService) ListTodos(
 		Int32("offset", offset).
 		Msg("listing todos")
 
-	todos, err := t.repo.List(ctx, store.ListOptions{
+	todos, err := s.repo.List(ctx, store.ListOptions{
 		Limit:  limit,
 		Offset: offset,
 	})
@@ -36,8 +36,8 @@ func (t todoService) ListTodos(
 	}
 
 	apiTodos := make([]*todoV1.Todo, 0, len(todos))
-	for index, todo := range todos {
-		apiTodos[index] = dbTodoToAPI(todo)
+	for _, todo := range todos {
+		apiTodos = append(apiTodos, dbTodoToAPI(todo))
 	}
 
 	log.Info().

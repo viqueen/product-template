@@ -22,6 +22,7 @@ func dbTodoToAPI(todo *store.Todo) *todoV1.Todo {
 	return &todoV1.Todo{
 		Id:          todo.ID.String(),
 		Description: todo.Description,
+		Status:      todoV1.TodoStatus(todo.Status),
 	}
 }
 

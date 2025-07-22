@@ -8,8 +8,9 @@ import (
 )
 
 type Todo struct {
-	ID          uuid.UUID `gorm:"type:uuid;primaryKey" json:"id"`
-	Description string    `gorm:"type:text;not null"   json:"description"`
+	ID          uuid.UUID `gorm:"type:uuid;primaryKey"   json:"id"`
+	Description string    `gorm:"type:text;not null"     json:"description"`
+	Status      int32     `gorm:"type:integer;default:1" json:"status"` // Maps to TodoStatus enum
 }
 
 func (Todo) TableName() string {
