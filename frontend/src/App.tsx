@@ -3,6 +3,7 @@ import { MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { LoginPage } from "./pages/login-page";
 import { HomePage } from "./pages/home-page";
+import { TasksPage } from "./pages/tasks-page";
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
@@ -24,6 +25,14 @@ function App() {
             element={
               <PrivateRoute>
                 <HomePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/tasks"
+            element={
+              <PrivateRoute>
+                <TasksPage />
               </PrivateRoute>
             }
           />

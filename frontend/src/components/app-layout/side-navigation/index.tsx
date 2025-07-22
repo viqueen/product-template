@@ -1,19 +1,14 @@
 import { Stack, Button } from "@mantine/core";
-import {
-  IconHome,
-  IconFolders,
-  IconChecklist,
-  IconUsers,
-  IconSettings,
-} from "@tabler/icons-react";
+import { IconHome, IconChecklist } from "@tabler/icons-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SideNavigation = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const navItems = [
-    { label: "Dashboard", icon: IconHome, active: true },
-    { label: "Projects", icon: IconFolders },
-    { label: "Tasks", icon: IconChecklist },
-    { label: "Team", icon: IconUsers },
-    { label: "Settings", icon: IconSettings },
+    { label: "Dashboard", icon: IconHome, path: "/home" },
+    { label: "Tasks", icon: IconChecklist, path: "/tasks" },
   ];
 
   return (
@@ -21,10 +16,11 @@ const SideNavigation = () => {
       {navItems.map((item) => (
         <Button
           key={item.label}
-          variant={item.active ? "light" : "subtle"}
+          variant={location.pathname === item.path ? "light" : "subtle"}
           fullWidth
           justify="flex-start"
           leftSection={<item.icon size={20} />}
+          onClick={() => navigate(item.path)}
         >
           {item.label}
         </Button>
