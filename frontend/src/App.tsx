@@ -1,9 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
-import { LoginPage } from "./pages/login-page";
-import { HomePage } from "./pages/home-page";
-import { TasksPage } from "./pages/tasks-page";
+import { LoginPage, HomePage, TasksPage } from "./pages";
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
