@@ -6,8 +6,8 @@ import (
 	"connectrpc.com/connect"
 	"github.com/gofrs/uuid"
 	"github.com/rs/zerolog/log"
-	todoV1 "github.com/viqueen/buf-template/api/go-sdk/todo/v1"
-	"github.com/viqueen/buf-template/backend/internal/store"
+	todoV1 "github.com/viqueen/product-template/api/go-sdk/todo/v1"
+	"github.com/viqueen/product-template/backend/internal/store"
 )
 
 func (t todoService) CreateTodo(

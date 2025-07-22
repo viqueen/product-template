@@ -1,4 +1,4 @@
-# buf-template
+# product-template
 
 This is a template for using the [buf](https://buf.build) build system to define APIs and
 implement them with Go using Connect rpc framework.

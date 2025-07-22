@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"connectrpc.com/connect"
-	todoV1 "github.com/viqueen/buf-template/api/go-sdk/todo/v1"
-	"github.com/viqueen/buf-template/backend/internal/store"
+	todoV1 "github.com/viqueen/product-template/api/go-sdk/todo/v1"
+	"github.com/viqueen/product-template/backend/internal/store"
 	"gorm.io/gorm"
 )
 

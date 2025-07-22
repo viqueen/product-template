@@ -20,7 +20,7 @@ linters:
         main:
           allow:
             - $gostd
-            - github.com/viqueen/buf-template
+            - github.com/viqueen/product-template
             - gorm.io/driver/postgres
             - gorm.io/gorm
             - connectrpc.com/connect

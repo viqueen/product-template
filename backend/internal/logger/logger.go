@@ -6,7 +6,7 @@ import (
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"github.com/viqueen/buf-template/backend/internal/config"
+	"github.com/viqueen/product-template/backend/internal/config"
 )
 
 func Init(cfg *config.Config) {

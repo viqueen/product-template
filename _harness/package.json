@@ -1,5 +1,5 @@
 {
-  "name": "@labset/buf-template-harness",
+  "name": "@labset/product-template-harness",
   "version": "1.0.0",
   "private": true,
   "scripts": {

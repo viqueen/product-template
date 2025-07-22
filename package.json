@@ -1,5 +1,5 @@
 {
-  "name": "@labset/buf-template",
+  "name": "@labset/product-template",
   "version": "1.0.0",
   "author": "Hasnae R. <>",
   "license": "Apache-2.0",
@@ -12,10 +12,10 @@
   ],
   "scripts": {
     "claude": "claude",
-    "harness": "npm run --workspace @labset/buf-template-harness",
-    "schema": "npm run --workspace @labset/buf-template-schema",
-    "backend": "npm run --workspace @labset/buf-template-backend",
-    "frontend": "npm run --workspace @labset/buf-template-frontend",
+    "harness": "npm run --workspace @labset/product-template-harness",
+    "schema": "npm run --workspace @labset/product-template-schema",
+    "backend": "npm run --workspace @labset/product-template-backend",
+    "frontend": "npm run --workspace @labset/product-template-frontend",
     "build": "npm run build --workspaces",
     "lint": "npm run lint --workspaces",
     "format": "prettier --write frontend/",

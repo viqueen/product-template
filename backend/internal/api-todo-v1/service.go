@@ -1,8 +1,8 @@
 package api_todo_v1
 
 import (
-	"github.com/viqueen/buf-template/api/go-sdk/todo/v1/todoV1connect"
-	"github.com/viqueen/buf-template/backend/internal/store"
+	"github.com/viqueen/product-template/api/go-sdk/todo/v1/todoV1connect"
+	"github.com/viqueen/product-template/backend/internal/store"
 )
 
 type todoService struct {

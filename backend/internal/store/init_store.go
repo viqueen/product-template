@@ -3,7 +3,7 @@ package store
 import (
 	"fmt"
 
-	"github.com/viqueen/buf-template/backend/internal/config"
+	"github.com/viqueen/product-template/backend/internal/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

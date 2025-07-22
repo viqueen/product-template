@@ -91,7 +91,7 @@ The project uses PostgreSQL with GORM for ORM. Database connection is configured
 1. Define services in `_schema/protos/`
 2. Run `npm run schema codegen` to generate SDKs
 3. Implement handlers in `backend/internal/api-*/`
-4. Use generated types in frontend via web SDK imports from `@labset/buf-template-web-sdk`
+4. Use generated types in frontend via web SDK imports from `@labset/product-template-web-sdk`
 
 ## Connect RPC Handler Pattern
 
@@ -111,7 +111,7 @@ Import and use generated clients:
 ```typescript
 import { createConnectTransport } from "@connectrpc/connect-web";
 import { createPromiseClient } from "@connectrpc/connect";
-import { TodoService } from "@labset/buf-template-web-sdk/todo/v1/todo_connect";
+import { TodoService } from "@labset/product-template-web-sdk/todo/v1/todo_connect";
 
 const transport = createConnectTransport({
   baseUrl: "http://localhost:8080",

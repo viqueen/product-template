@@ -1,5 +1,5 @@
 {
-  "name": "@labset/buf-template-backend",
+  "name": "@labset/product-template-backend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
