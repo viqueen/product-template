@@ -5,13 +5,13 @@ import { TopNavigation } from "./top-navigation";
 import { SideNavigation } from "./side-navigation";
 
 const AppLayout = ({ children }: PropsWithChildren) => {
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle }] = useDisclosure(true); // Default to open
 
   return (
     <AppShell
       header={{ height: 60 }}
       navbar={{
-        width: 300,
+        width: opened ? 300 : 80,
         breakpoint: "sm",
         collapsed: { mobile: !opened },
       }}
@@ -21,7 +21,7 @@ const AppLayout = ({ children }: PropsWithChildren) => {
         <TopNavigation opened={opened} toggle={toggle} />
       </AppShell.Header>
       <AppShell.Navbar>
-        <SideNavigation />
+        <SideNavigation opened={opened} />
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
