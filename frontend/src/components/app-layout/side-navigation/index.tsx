@@ -19,7 +19,7 @@ const SideNavigation = ({ opened }: SideNavigationProps) => {
     <Stack p="md" align={opened ? "stretch" : "center"}>
       {navItems.map((item) => {
         const isActive = location.pathname === item.path;
-        
+
         if (!opened) {
           // Show only icon when collapsed
           return (

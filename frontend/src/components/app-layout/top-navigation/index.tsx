@@ -1,6 +1,10 @@
 import { Group, Title, Button, Avatar, ActionIcon } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import { IconChecklist, IconLayoutSidebarLeftCollapse, IconLayoutSidebarLeftExpand } from "@tabler/icons-react";
+import {
+  IconChecklist,
+  IconLayoutSidebarLeftCollapse,
+  IconLayoutSidebarLeftExpand,
+} from "@tabler/icons-react";
 import { ThemeToggle } from "../../theme-toggle";
 
 interface TopNavigationProps {
@@ -19,9 +23,9 @@ const TopNavigation = ({ opened, toggle }: TopNavigationProps) => {
   return (
     <Group h="100%" px="md" justify="space-between">
       <Group>
-        <ActionIcon 
-          onClick={toggle} 
-          variant="subtle" 
+        <ActionIcon
+          onClick={toggle}
+          variant="subtle"
           size="lg"
           aria-label={opened ? "Collapse sidebar" : "Expand sidebar"}
         >
