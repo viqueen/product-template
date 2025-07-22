@@ -4,7 +4,22 @@ option go_package = "github.com/viqueen/product-template/api/go-sdk/todo/v1;todo
 
 package todo.v1;
 
+// TodoStatus represents the current state of a todo item
+enum TodoStatus {
+  // Default unspecified status
+  TODO_STATUS_UNSPECIFIED = 0;
+  // Todo is pending and not yet started
+  TODO_STATUS_PENDING = 1;
+  // Todo is currently in progress
+  TODO_STATUS_IN_PROGRESS = 2;
+  // Todo has been completed
+  TODO_STATUS_COMPLETED = 3;
+  // Todo has been cancelled
+  TODO_STATUS_CANCELLED = 4;
+}
+
 message Todo {
   string id = 1;
   string description = 2;
+  TodoStatus status = 3;
 }

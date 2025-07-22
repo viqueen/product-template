@@ -5,11 +5,13 @@ option go_package = "github.com/viqueen/product-template/api/go-sdk/todo/v1;todo
 package todo.v1;
 
 import "todo/v1/todo_model.proto";
+import "google/protobuf/field_mask.proto";
 
 service TodoService {
   rpc CreateTodo (CreateTodoRequest) returns (CreateTodoResponse) {}
   rpc GetTodo (GetTodoRequest) returns (GetTodoResponse) {}
   rpc ListTodos (ListTodosRequest) returns (ListTodosResponse) {}
+  rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse) {}
 }
 
 message CreateTodoRequest {
@@ -37,4 +39,21 @@ message ListTodosResponse {
   repeated Todo todos = 1;
   int32 next_page_offset = 2;
   bool has_more = 3;
+}
+
+message UpdateTodoRequest {
+  // The ID of the todo to update
+  string id = 1;
+  
+  // The todo object with updated fields
+  Todo todo = 2;
+  
+  // Field mask to specify which fields to update
+  // Examples: "description", "status", or "description,status"
+  google.protobuf.FieldMask update_mask = 3;
+}
+
+message UpdateTodoResponse {
+  // The updated todo
+  Todo todo = 1;
 }
