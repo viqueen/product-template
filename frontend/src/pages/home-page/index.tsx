@@ -14,6 +14,7 @@ import {
   Avatar,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { ThemeToggle } from "../../components";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const HomePage = () => {
             <Title order={3}>Dashboard</Title>
           </Group>
           <Group>
+            <ThemeToggle />
             <Avatar color="blue" radius="xl">JD</Avatar>
             <Button variant="subtle" onClick={handleLogout}>
               Logout

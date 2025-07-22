@@ -14,6 +14,7 @@ import {
   rem,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { ThemeToggle } from "../../components";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -45,6 +46,9 @@ const LoginPage = () => {
 
   return (
     <Container size={420} my={40}>
+      <Box pos="absolute" top={20} right={20}>
+        <ThemeToggle />
+      </Box>
       <Title ta="center">Welcome back!</Title>
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
         <form onSubmit={form.onSubmit(handleSubmit)}>
