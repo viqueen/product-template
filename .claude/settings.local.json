@@ -5,7 +5,10 @@
       "Bash(git commit:*)",
       "Bash(go mod:*)",
       "Bash(go build:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(npm run schema:*)",
+      "Bash(npm run backend:*)",
+      "Bash(./bin/lint.sh:*)"
     ],
     "deny": []
   }
