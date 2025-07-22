@@ -45,12 +45,19 @@ const HomePage = () => {
       <AppShell.Header>
         <Group h="100%" px="md" justify="space-between">
           <Group>
-            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="sm"
+              size="sm"
+            />
             <Title order={3}>Dashboard</Title>
           </Group>
           <Group>
             <ThemeToggle />
-            <Avatar color="blue" radius="xl">JD</Avatar>
+            <Avatar color="blue" radius="xl">
+              JD
+            </Avatar>
             <Button variant="subtle" onClick={handleLogout}>
               Logout
             </Button>
@@ -85,7 +92,9 @@ const HomePage = () => {
               <Title order={2} mb="xs">
                 Welcome back!
               </Title>
-              <Text c="dimmed">Here's what's happening with your projects today.</Text>
+              <Text c="dimmed">
+                Here's what's happening with your projects today.
+              </Text>
             </div>
 
             <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing="lg">
