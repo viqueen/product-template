@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Badge,
@@ -14,11 +14,20 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import {IconAlertCircle, IconCheck, IconClock, IconPlus, IconX,} from "@tabler/icons-react";
-import {AppLayout} from "../../components";
-import {createConnectTransport} from "@connectrpc/connect-web";
-import {createClient} from "@connectrpc/connect";
-import {TodoV1TodoModel, TodoV1TodoService} from "@labset/product-template-api-web-sdk";
+import {
+  IconAlertCircle,
+  IconCheck,
+  IconClock,
+  IconPlus,
+  IconX,
+} from "@tabler/icons-react";
+import { AppLayout } from "../../components";
+import { createConnectTransport } from "@connectrpc/connect-web";
+import { createClient } from "@connectrpc/connect";
+import {
+  TodoV1TodoModel,
+  TodoV1TodoService,
+} from "@labset/product-template-api-web-sdk";
 
 const transport = createConnectTransport({
   baseUrl: "http://localhost:8080",
@@ -119,7 +128,10 @@ const TasksPage = () => {
   };
 
   // Update todo status
-  const handleUpdateStatus = async (todoId: string, newStatus: TodoV1TodoModel.TodoStatus) => {
+  const handleUpdateStatus = async (
+    todoId: string,
+    newStatus: TodoV1TodoModel.TodoStatus,
+  ) => {
     try {
       await client.updateTodo({
         id: todoId,
@@ -196,7 +208,9 @@ const TasksPage = () => {
           ) : todos.length === 0 ? (
             <Card withBorder radius="md" p="xl">
               <Center>
-                <Text c="dimmed">No tasks yet. Create your first task above!</Text>
+                <Text c="dimmed">
+                  No tasks yet. Create your first task above!
+                </Text>
               </Center>
             </Card>
           ) : (
@@ -233,20 +247,30 @@ const TasksPage = () => {
                         size="xs"
                         value={todo.status.toString()}
                         onChange={(value) =>
-                          handleUpdateStatus(todo.id, parseInt(value!) as TodoV1TodoModel.TodoStatus)
+                          handleUpdateStatus(
+                            todo.id,
+                            parseInt(value!) as TodoV1TodoModel.TodoStatus,
+                          )
                         }
                         data={[
-                          { value: TodoV1TodoModel.TodoStatus.PENDING.toString(), label: "Pending" },
                           {
-                            value: TodoV1TodoModel.TodoStatus.IN_PROGRESS.toString(),
+                            value:
+                              TodoV1TodoModel.TodoStatus.PENDING.toString(),
+                            label: "Pending",
+                          },
+                          {
+                            value:
+                              TodoV1TodoModel.TodoStatus.IN_PROGRESS.toString(),
                             label: "In Progress",
                           },
                           {
-                            value: TodoV1TodoModel.TodoStatus.COMPLETED.toString(),
+                            value:
+                              TodoV1TodoModel.TodoStatus.COMPLETED.toString(),
                             label: "Completed",
                           },
                           {
-                            value: TodoV1TodoModel.TodoStatus.CANCELLED.toString(),
+                            value:
+                              TodoV1TodoModel.TodoStatus.CANCELLED.toString(),
                             label: "Cancelled",
                           },
                         ]}

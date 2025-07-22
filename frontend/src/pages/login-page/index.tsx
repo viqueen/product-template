@@ -11,7 +11,6 @@ import {
   Anchor,
   Center,
   Box,
-  rem,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { ThemeToggle } from "../../components";
