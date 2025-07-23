@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   Alert,
-  Badge,
   Button,
   Card,
   Center,
@@ -16,12 +15,11 @@ import {
 } from "@mantine/core";
 import {
   IconAlertCircle,
-  IconCheck,
-  IconClock,
   IconPlus,
-  IconX,
 } from "@tabler/icons-react";
 import { AppLayout } from "../../components";
+import { TodoStatusBadge } from "../../components/ui";
+import { getTodoStatusLabel } from "../../utils/todo-helpers";
 import { createConnectTransport } from "@connectrpc/connect-web";
 import { createClient } from "@connectrpc/connect";
 import {
@@ -41,54 +39,6 @@ const TasksPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [newTodoDescription, setNewTodoDescription] = useState("");
   const [addingTodo, setAddingTodo] = useState(false);
-
-  // Status badge colors
-  const getStatusColor = (status: TodoV1TodoModel.TodoStatus) => {
-    switch (status) {
-      case TodoV1TodoModel.TodoStatus.PENDING:
-        return "blue";
-      case TodoV1TodoModel.TodoStatus.IN_PROGRESS:
-        return "yellow";
-      case TodoV1TodoModel.TodoStatus.COMPLETED:
-        return "green";
-      case TodoV1TodoModel.TodoStatus.CANCELLED:
-        return "red";
-      default:
-        return "gray";
-    }
-  };
-
-  // Status icons
-  const getStatusIcon = (status: TodoV1TodoModel.TodoStatus) => {
-    switch (status) {
-      case TodoV1TodoModel.TodoStatus.PENDING:
-        return <IconClock size={16} />;
-      case TodoV1TodoModel.TodoStatus.IN_PROGRESS:
-        return <IconClock size={16} />;
-      case TodoV1TodoModel.TodoStatus.COMPLETED:
-        return <IconCheck size={16} />;
-      case TodoV1TodoModel.TodoStatus.CANCELLED:
-        return <IconX size={16} />;
-      default:
-        return null;
-    }
-  };
-
-  // Status display text
-  const getStatusText = (status: TodoV1TodoModel.TodoStatus) => {
-    switch (status) {
-      case TodoV1TodoModel.TodoStatus.PENDING:
-        return "Pending";
-      case TodoV1TodoModel.TodoStatus.IN_PROGRESS:
-        return "In Progress";
-      case TodoV1TodoModel.TodoStatus.COMPLETED:
-        return "Completed";
-      case TodoV1TodoModel.TodoStatus.CANCELLED:
-        return "Cancelled";
-      default:
-        return "Unknown";
-    }
-  };
 
   // Fetch todos
   const fetchTodos = async () => {
@@ -236,13 +186,7 @@ const TasksPage = () => {
                       </Text>
                     </div>
                     <Group gap="xs">
-                      <Badge
-                        leftSection={getStatusIcon(todo.status)}
-                        color={getStatusColor(todo.status)}
-                        variant="light"
-                      >
-                        {getStatusText(todo.status)}
-                      </Badge>
+                      <TodoStatusBadge status={todo.status} />
                       <Select
                         size="xs"
                         value={todo.status.toString()}
@@ -254,24 +198,20 @@ const TasksPage = () => {
                         }
                         data={[
                           {
-                            value:
-                              TodoV1TodoModel.TodoStatus.PENDING.toString(),
-                            label: "Pending",
+                            value: TodoV1TodoModel.TodoStatus.PENDING.toString(),
+                            label: getTodoStatusLabel(TodoV1TodoModel.TodoStatus.PENDING),
                           },
                           {
-                            value:
-                              TodoV1TodoModel.TodoStatus.IN_PROGRESS.toString(),
-                            label: "In Progress",
+                            value: TodoV1TodoModel.TodoStatus.IN_PROGRESS.toString(),
+                            label: getTodoStatusLabel(TodoV1TodoModel.TodoStatus.IN_PROGRESS),
                           },
                           {
-                            value:
-                              TodoV1TodoModel.TodoStatus.COMPLETED.toString(),
-                            label: "Completed",
+                            value: TodoV1TodoModel.TodoStatus.COMPLETED.toString(),
+                            label: getTodoStatusLabel(TodoV1TodoModel.TodoStatus.COMPLETED),
                           },
                           {
-                            value:
-                              TodoV1TodoModel.TodoStatus.CANCELLED.toString(),
-                            label: "Cancelled",
+                            value: TodoV1TodoModel.TodoStatus.CANCELLED.toString(),
+                            label: getTodoStatusLabel(TodoV1TodoModel.TodoStatus.CANCELLED),
                           },
                         ]}
                         style={{ width: 130 }}

@@ -5,7 +5,6 @@ import {
   Text,
   Card,
   SimpleGrid,
-  Badge,
   Stack,
   Group,
   Loader,
@@ -14,13 +13,11 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import {
-  IconClock,
-  IconPlayerPlay,
-  IconCheck,
-  IconX,
   IconChecklist,
 } from "@tabler/icons-react";
 import { AppLayout } from "../../components";
+import { TodoSummaryCard, TodoStatusBadge } from "../../components/ui";
+import { calculateTodoStats } from "../../utils/todo-helpers";
 import { createConnectTransport } from "@connectrpc/connect-web";
 import { createClient } from "@connectrpc/connect";
 import {
@@ -59,69 +56,13 @@ const HomePage = () => {
   }, []);
 
   // Calculate status counts
-  const getStatusCounts = () => {
-    const counts = {
-      total: todos.length,
-      pending: 0,
-      inProgress: 0,
-      completed: 0,
-      cancelled: 0,
-    };
+  const { counts, completionRate } = calculateTodoStats(todos);
 
-    todos.forEach((todo) => {
-      switch (todo.status) {
-        case TodoV1TodoModel.TodoStatus.PENDING:
-          counts.pending++;
-          break;
-        case TodoV1TodoModel.TodoStatus.IN_PROGRESS:
-          counts.inProgress++;
-          break;
-        case TodoV1TodoModel.TodoStatus.COMPLETED:
-          counts.completed++;
-          break;
-        case TodoV1TodoModel.TodoStatus.CANCELLED:
-          counts.cancelled++;
-          break;
-      }
-    });
-
-    return counts;
-  };
-
-  const counts = getStatusCounts();
-  const completionRate = counts.total > 0 
-    ? Math.round((counts.completed / counts.total) * 100) 
-    : 0;
-
-  const stats = [
-    {
-      title: "Pending Tasks",
-      value: counts.pending,
-      description: "Waiting to start",
-      color: "blue",
-      icon: IconClock,
-    },
-    {
-      title: "In Progress",
-      value: counts.inProgress,
-      description: "Currently working on",
-      color: "yellow",
-      icon: IconPlayerPlay,
-    },
-    {
-      title: "Completed",
-      value: counts.completed,
-      description: "Successfully finished",
-      color: "green",
-      icon: IconCheck,
-    },
-    {
-      title: "Cancelled",
-      value: counts.cancelled,
-      description: "No longer needed",
-      color: "red",
-      icon: IconX,
-    },
+  const todoStatuses = [
+    TodoV1TodoModel.TodoStatus.PENDING,
+    TodoV1TodoModel.TodoStatus.IN_PROGRESS,
+    TodoV1TodoModel.TodoStatus.COMPLETED,
+    TodoV1TodoModel.TodoStatus.CANCELLED,
   ];
 
   if (loading) {
@@ -150,24 +91,21 @@ const HomePage = () => {
           </div>
 
           <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing="lg">
-            {stats.map((stat) => (
-              <Card key={stat.title} withBorder p="md" radius="md">
-                <Group justify="space-between" mb="xs">
-                  <Text size="xs" tt="uppercase" fw={700} c="dimmed">
-                    {stat.title}
-                  </Text>
-                  <ThemeIcon color={stat.color} variant="light" size="sm">
-                    <stat.icon size={16} />
-                  </ThemeIcon>
-                </Group>
-                <Text fw={700} size="xl">
-                  {stat.value}
-                </Text>
-                <Text size="xs" c="dimmed" mt={7}>
-                  {stat.description}
-                </Text>
-              </Card>
-            ))}
+            {todoStatuses.map((status) => {
+              const count = 
+                status === TodoV1TodoModel.TodoStatus.PENDING ? counts.pending :
+                status === TodoV1TodoModel.TodoStatus.IN_PROGRESS ? counts.inProgress :
+                status === TodoV1TodoModel.TodoStatus.COMPLETED ? counts.completed :
+                counts.cancelled;
+              
+              return (
+                <TodoSummaryCard
+                  key={status}
+                  status={status}
+                  count={count}
+                />
+              );
+            })}
           </SimpleGrid>
 
           <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
@@ -230,27 +168,7 @@ const HomePage = () => {
                         <Text size="sm" lineClamp={1} style={{ flex: 1 }}>
                           {todo.description}
                         </Text>
-                        <Badge
-                          size="xs"
-                          color={
-                            todo.status === TodoV1TodoModel.TodoStatus.COMPLETED
-                              ? "green"
-                              : todo.status === TodoV1TodoModel.TodoStatus.IN_PROGRESS
-                              ? "yellow"
-                              : todo.status === TodoV1TodoModel.TodoStatus.CANCELLED
-                              ? "red"
-                              : "blue"
-                          }
-                          variant="light"
-                        >
-                          {todo.status === TodoV1TodoModel.TodoStatus.PENDING
-                            ? "Pending"
-                            : todo.status === TodoV1TodoModel.TodoStatus.IN_PROGRESS
-                            ? "In Progress"
-                            : todo.status === TodoV1TodoModel.TodoStatus.COMPLETED
-                            ? "Completed"
-                            : "Cancelled"}
-                        </Badge>
+                        <TodoStatusBadge status={todo.status} size="xs" showIcon={false} />
                       </Group>
                     ))}
                   </Stack>
