@@ -1,5 +1,4 @@
-import { Group, Title, Button, Avatar, ActionIcon } from "@mantine/core";
-import { useNavigate } from "react-router-dom";
+import { Group, Title, Avatar, ActionIcon } from "@mantine/core";
 import {
   IconChecklist,
   IconLayoutSidebarLeftCollapse,
@@ -13,13 +12,6 @@ interface TopNavigationProps {
 }
 
 const TopNavigation = ({ opened, toggle }: TopNavigationProps) => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
-    navigate("/");
-  };
-
   return (
     <Group h="100%" px="md" justify="space-between">
       <Group>
@@ -45,9 +37,6 @@ const TopNavigation = ({ opened, toggle }: TopNavigationProps) => {
         <Avatar color="blue" radius="xl">
           JD
         </Avatar>
-        <Button variant="subtle" onClick={handleLogout}>
-          Logout
-        </Button>
       </Group>
     </Group>
   );

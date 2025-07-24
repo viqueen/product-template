@@ -11,7 +11,7 @@ const SideNavigation = ({ opened }: SideNavigationProps) => {
   const location = useLocation();
 
   const navItems = [
-    { label: "Dashboard", icon: IconHome, path: "/home" },
+    { label: "Dashboard", icon: IconHome, path: "/" },
     { label: "Tasks", icon: IconChecklist, path: "/tasks" },
   ];
 
