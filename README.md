@@ -2,6 +2,7 @@
 
 This is a template for using the [buf](https://buf.build) build system to define APIs and
 implement them with Go using Connect rpc framework.
+It also includes a basic setup for a web application using React and TypeScript, with Vite as the build tool, and Mantine as the UI component library.
 
 ## development
 

@@ -7,7 +7,10 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { TodoV1TodoModel } from "@labset/product-template-api-web-sdk";
-import { getTodoStatusColor, getTodoStatusLabel } from "../../../utils/todo-helpers";
+import {
+  getTodoStatusColor,
+  getTodoStatusLabel,
+} from "../../../utils/todo-helpers";
 
 interface TodoSummaryCardProps extends CardProps {
   status: TodoV1TodoModel.TodoStatus;

@@ -12,9 +12,7 @@ import {
   RingProgress,
   ThemeIcon,
 } from "@mantine/core";
-import {
-  IconChecklist,
-} from "@tabler/icons-react";
+import { IconChecklist } from "@tabler/icons-react";
 import { AppLayout } from "../../components";
 import { TodoSummaryCard, TodoStatusBadge } from "../../components/ui";
 import { calculateTodoStats } from "../../utils/todo-helpers";
@@ -92,18 +90,17 @@ const HomePage = () => {
 
           <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing="lg">
             {todoStatuses.map((status) => {
-              const count = 
-                status === TodoV1TodoModel.TodoStatus.PENDING ? counts.pending :
-                status === TodoV1TodoModel.TodoStatus.IN_PROGRESS ? counts.inProgress :
-                status === TodoV1TodoModel.TodoStatus.COMPLETED ? counts.completed :
-                counts.cancelled;
-              
+              const count =
+                status === TodoV1TodoModel.TodoStatus.PENDING
+                  ? counts.pending
+                  : status === TodoV1TodoModel.TodoStatus.IN_PROGRESS
+                    ? counts.inProgress
+                    : status === TodoV1TodoModel.TodoStatus.COMPLETED
+                      ? counts.completed
+                      : counts.cancelled;
+
               return (
-                <TodoSummaryCard
-                  key={status}
-                  status={status}
-                  count={count}
-                />
+                <TodoSummaryCard key={status} status={status} count={count} />
               );
             })}
           </SimpleGrid>
@@ -117,12 +114,15 @@ const HomePage = () => {
                 <RingProgress
                   size={200}
                   thickness={20}
-                  sections={[
-                    { value: completionRate, color: "green" },
-                  ]}
+                  sections={[{ value: completionRate, color: "green" }]}
                   label={
                     <Center>
-                      <ThemeIcon color="green" variant="light" radius="xl" size="xl">
+                      <ThemeIcon
+                        color="green"
+                        variant="light"
+                        radius="xl"
+                        size="xl"
+                      >
                         <IconChecklist size={28} />
                       </ThemeIcon>
                     </Center>
@@ -168,7 +168,11 @@ const HomePage = () => {
                         <Text size="sm" lineClamp={1} style={{ flex: 1 }}>
                           {todo.description}
                         </Text>
-                        <TodoStatusBadge status={todo.status} size="xs" showIcon={false} />
+                        <TodoStatusBadge
+                          status={todo.status}
+                          size="xs"
+                          showIcon={false}
+                        />
                       </Group>
                     ))}
                   </Stack>

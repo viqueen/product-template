@@ -1,6 +1,8 @@
 import { TodoV1TodoModel } from "@labset/product-template-api-web-sdk";
 
-export const getTodoStatusColor = (status: TodoV1TodoModel.TodoStatus): string => {
+export const getTodoStatusColor = (
+  status: TodoV1TodoModel.TodoStatus,
+): string => {
   switch (status) {
     case TodoV1TodoModel.TodoStatus.PENDING:
       return "blue";
@@ -15,7 +17,9 @@ export const getTodoStatusColor = (status: TodoV1TodoModel.TodoStatus): string =
   }
 };
 
-export const getTodoStatusLabel = (status: TodoV1TodoModel.TodoStatus): string => {
+export const getTodoStatusLabel = (
+  status: TodoV1TodoModel.TodoStatus,
+): string => {
   switch (status) {
     case TodoV1TodoModel.TodoStatus.PENDING:
       return "Pending";
@@ -56,9 +60,8 @@ export const calculateTodoStats = (todos: TodoV1TodoModel.Todo[]) => {
     }
   });
 
-  const completionRate = counts.total > 0 
-    ? Math.round((counts.completed / counts.total) * 100) 
-    : 0;
+  const completionRate =
+    counts.total > 0 ? Math.round((counts.completed / counts.total) * 100) : 0;
 
   const activeCount = counts.pending + counts.inProgress;
 
