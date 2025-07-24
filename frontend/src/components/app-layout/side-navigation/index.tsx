@@ -16,7 +16,7 @@ const SideNavigation = ({ opened }: SideNavigationProps) => {
   ];
 
   return (
-    <Stack p="md" align={opened ? "stretch" : "center"}>
+    <Stack p="xs" gap="xs" align={opened ? "stretch" : "center"}>
       {navItems.map((item) => {
         const isActive = location.pathname === item.path;
 
@@ -31,11 +31,11 @@ const SideNavigation = ({ opened }: SideNavigationProps) => {
             >
               <ActionIcon
                 variant={isActive ? "light" : "subtle"}
-                size="lg"
+                size="md"
                 onClick={() => navigate(item.path)}
                 aria-label={item.label}
               >
-                <item.icon size={20} />
+                <item.icon size={18} />
               </ActionIcon>
             </Tooltip>
           );
@@ -47,8 +47,9 @@ const SideNavigation = ({ opened }: SideNavigationProps) => {
             key={item.label}
             variant={isActive ? "light" : "subtle"}
             fullWidth
+            size="sm"
             justify="flex-start"
-            leftSection={<item.icon size={20} />}
+            leftSection={<item.icon size={18} />}
             onClick={() => navigate(item.path)}
           >
             {item.label}

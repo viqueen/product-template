@@ -13,28 +13,28 @@ interface TopNavigationProps {
 
 const TopNavigation = ({ opened, toggle }: TopNavigationProps) => {
   return (
-    <Group h="100%" px="md" justify="space-between">
-      <Group>
+    <Group h="100%" px="sm" justify="space-between">
+      <Group gap="xs">
         <ActionIcon
           onClick={toggle}
           variant="subtle"
-          size="lg"
+          size="sm"
           aria-label={opened ? "Collapse sidebar" : "Expand sidebar"}
         >
           {opened ? (
-            <IconLayoutSidebarLeftCollapse size={22} stroke={1.5} />
+            <IconLayoutSidebarLeftCollapse size={18} stroke={1.5} />
           ) : (
-            <IconLayoutSidebarLeftExpand size={22} stroke={1.5} />
+            <IconLayoutSidebarLeftExpand size={18} stroke={1.5} />
           )}
         </ActionIcon>
-        <Group gap="xs">
-          <IconChecklist size={24} stroke={1.5} />
-          <Title order={3}>Product</Title>
+        <Group gap={4}>
+          <IconChecklist size={20} stroke={1.5} />
+          <Title order={4}>Product</Title>
         </Group>
       </Group>
-      <Group>
+      <Group gap="xs">
         <ThemeToggle />
-        <Avatar color="blue" radius="xl">
+        <Avatar size="sm" color="blue" radius="xl">
           JD
         </Avatar>
       </Group>

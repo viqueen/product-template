@@ -9,13 +9,13 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <AppShell
-      header={{ height: 60 }}
+      header={{ height: 48 }}
       navbar={{
-        width: opened ? 300 : 80,
+        width: opened ? 200 : 60,
         breakpoint: "sm",
         collapsed: { mobile: !opened },
       }}
-      padding="md"
+      padding="sm"
     >
       <AppShell.Header>
         <TopNavigation opened={opened} toggle={toggle} />
