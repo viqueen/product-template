@@ -13,27 +13,16 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import {
-  IconAlertCircle,
-  IconPlus,
-} from "@tabler/icons-react";
+import { IconAlertCircle, IconPlus } from "@tabler/icons-react";
 import { AppLayout } from "../../components";
 import { TodoStatusBadge } from "../../components/ui";
 import { getTodoStatusLabel } from "../../utils/todo-helpers";
-import { createConnectTransport } from "@connectrpc/connect-web";
-import { createClient } from "@connectrpc/connect";
-import {
-  TodoV1TodoModel,
-  TodoV1TodoService,
-} from "@labset/product-template-api-web-sdk";
-
-const transport = createConnectTransport({
-  baseUrl: "http://localhost:8080",
-});
-
-const client = createClient(TodoV1TodoService.TodoService, transport);
+import { TodoV1TodoModel } from "@labset/product-template-api-web-sdk";
+import { useConnectApi } from "../../context-providers";
 
 const TasksPage = () => {
+  const { todoClient } = useConnectApi();
+
   const [todos, setTodos] = useState<TodoV1TodoModel.Todo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +34,7 @@ const TasksPage = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await client.listTodos({
+      const response = await todoClient.listTodos({
         pageLimit: 50,
         pageOffset: 0,
       });
@@ -64,7 +53,7 @@ const TasksPage = () => {
 
     try {
       setAddingTodo(true);
-      await client.createTodo({
+      await todoClient.createTodo({
         description: newTodoDescription,
       });
       setNewTodoDescription("");
@@ -83,7 +72,7 @@ const TasksPage = () => {
     newStatus: TodoV1TodoModel.TodoStatus,
   ) => {
     try {
-      await client.updateTodo({
+      await todoClient.updateTodo({
         id: todoId,
         todo: {
           id: todoId,
@@ -198,20 +187,32 @@ const TasksPage = () => {
                         }
                         data={[
                           {
-                            value: TodoV1TodoModel.TodoStatus.PENDING.toString(),
-                            label: getTodoStatusLabel(TodoV1TodoModel.TodoStatus.PENDING),
+                            value:
+                              TodoV1TodoModel.TodoStatus.PENDING.toString(),
+                            label: getTodoStatusLabel(
+                              TodoV1TodoModel.TodoStatus.PENDING,
+                            ),
                           },
                           {
-                            value: TodoV1TodoModel.TodoStatus.IN_PROGRESS.toString(),
-                            label: getTodoStatusLabel(TodoV1TodoModel.TodoStatus.IN_PROGRESS),
+                            value:
+                              TodoV1TodoModel.TodoStatus.IN_PROGRESS.toString(),
+                            label: getTodoStatusLabel(
+                              TodoV1TodoModel.TodoStatus.IN_PROGRESS,
+                            ),
                           },
                           {
-                            value: TodoV1TodoModel.TodoStatus.COMPLETED.toString(),
-                            label: getTodoStatusLabel(TodoV1TodoModel.TodoStatus.COMPLETED),
+                            value:
+                              TodoV1TodoModel.TodoStatus.COMPLETED.toString(),
+                            label: getTodoStatusLabel(
+                              TodoV1TodoModel.TodoStatus.COMPLETED,
+                            ),
                           },
                           {
-                            value: TodoV1TodoModel.TodoStatus.CANCELLED.toString(),
-                            label: getTodoStatusLabel(TodoV1TodoModel.TodoStatus.CANCELLED),
+                            value:
+                              TodoV1TodoModel.TodoStatus.CANCELLED.toString(),
+                            label: getTodoStatusLabel(
+                              TodoV1TodoModel.TodoStatus.CANCELLED,
+                            ),
                           },
                         ]}
                         style={{ width: 130 }}

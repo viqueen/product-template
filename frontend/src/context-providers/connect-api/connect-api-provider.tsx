@@ -9,10 +9,10 @@ export const ConnectApiProvider = ({ children }: PropsWithChildren) => {
     baseUrl: "http://localhost:8080",
   });
 
-  const todo = createClient(TodoV1TodoService.TodoService, transport);
+  const todoClient = createClient(TodoV1TodoService.TodoService, transport);
 
   return (
-    <ConnectApiContext.Provider value={{ todo }}>
+    <ConnectApiContext.Provider value={{ todoClient }}>
       {children}
     </ConnectApiContext.Provider>
   );
