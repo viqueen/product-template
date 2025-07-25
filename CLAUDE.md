@@ -107,15 +107,41 @@ func (s *Service) MethodName(
 
 ## Frontend API Client Usage
 
-Import and use generated clients:
+The project uses a React Context Provider pattern for API client access:
+
+### Context Provider Setup
+The API clients are configured in `frontend/src/context-providers/connect-api/`:
 ```typescript
 import { createConnectTransport } from "@connectrpc/connect-web";
-import { createPromiseClient } from "@connectrpc/connect";
-import { TodoService } from "@labset/product-template-web-sdk/todo/v1/todo_connect";
+import { createClient } from "@connectrpc/connect";
+import { TodoV1TodoService } from "@labset/product-template-api-web-sdk";
 
 const transport = createConnectTransport({
   baseUrl: "http://localhost:8080",
 });
 
-const client = createPromiseClient(TodoService, transport);
+const todoClient = createClient(TodoV1TodoService.TodoService, transport);
 ```
+
+### Using API Clients in Components
+Access API clients via the `useConnectApi` hook:
+```typescript
+import { useConnectApi } from "../../context-providers";
+
+const Component = () => {
+  const { todoClient } = useConnectApi();
+  
+  const fetchTodos = async () => {
+    const response = await todoClient.listTodos({
+      pageLimit: 50,
+      pageOffset: 0,
+    });
+    // Handle response
+  };
+};
+```
+
+### Import Paths
+- Service types: `import { TodoV1TodoService } from "@labset/product-template-api-web-sdk"`
+- Model types: `import { TodoV1TodoModel } from "@labset/product-template-api-web-sdk"`
+- Connect utilities: `import { createConnectTransport, createClient } from "@connectrpc/connect-web"`
